@@ -1,6 +1,6 @@
 const linkTargets = [
-  { label: "Home", href: "#", left: 858, top: 39, width: 50, height: 32 },
-  { label: "FAQ", href: "#", left: 934, top: 39, width: 48, height: 32 },
+  { label: "Home", href: "/", left: 858, top: 39, width: 50, height: 32 },
+  { label: "FAQ", href: "/faq", left: 934, top: 39, width: 48, height: 32 },
   { label: "About us", href: "#", left: 997, top: 39, width: 78, height: 32 },
   { label: "Pricing", href: "#", left: 1094, top: 39, width: 70, height: 32 },
   { label: "Log in", href: "#", left: 1192, top: 39, width: 58, height: 32 },
