@@ -30,13 +30,16 @@ const linkTargets = [
   },
 ];
 
+const headerLinks = linkTargets.filter((link) => link.top < 100);
 const CANVAS_WIDTH = 1440;
 const CANVAS_HEIGHT = 6169;
+const HEADER_HEIGHT = 100;
 
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
       <h1 className="sr-only">NephroReach</h1>
+      <FixedHeader />
       <div
         className="relative mx-auto w-full max-w-[1440px] bg-[url('/figma-assets/homepage-design.svg')] bg-contain bg-top bg-no-repeat [aspect-ratio:1440/6169]"
       >
@@ -78,5 +81,27 @@ export default function HomePage() {
         </p>
       </section>
     </main>
+  );
+}
+
+function FixedHeader() {
+  return (
+    <div className="fixed left-1/2 top-0 z-50 w-full max-w-[1440px] -translate-x-1/2 bg-white [aspect-ratio:1440/100]">
+      <div className="absolute inset-0 bg-[url('/figma-assets/homepage-design.svg')] bg-[length:100%_auto] bg-top bg-no-repeat" />
+      {headerLinks.map((link) => (
+        <a
+          key={`fixed-${link.label}-${link.left}-${link.top}`}
+          href={link.href}
+          aria-label={link.label}
+          className="absolute block rounded-[10px] outline-none focus-visible:ring-4 focus-visible:ring-[#2563eb]/40"
+          style={{
+            left: `${(link.left / CANVAS_WIDTH) * 100}%`,
+            top: `${(link.top / HEADER_HEIGHT) * 100}%`,
+            width: `${(link.width / CANVAS_WIDTH) * 100}%`,
+            height: `${(link.height / HEADER_HEIGHT) * 100}%`,
+          }}
+        />
+      ))}
+    </div>
   );
 }
