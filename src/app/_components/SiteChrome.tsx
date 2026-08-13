@@ -6,8 +6,10 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "FAQ", href: "/faq" },
   { label: "About us", href: "#" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Pricing", href: "/pricing" },
 ];
+
+const socialItems = ["t", "o", "in", ">"];
 
 export function Header() {
   return (
@@ -17,8 +19,8 @@ export function Header() {
           <Image
             src="/figma-assets/nephroreach-logo.png"
             alt="NephroReach"
-            width={132}
-            height={84}
+            width={86}
+            height={68}
             className="h-[64px] w-auto"
             priority
           />
@@ -90,22 +92,22 @@ export function QuestionBanner() {
 
 export function Footer() {
   return (
-    <footer className="bg-[#dbeaff] px-6 pb-[88px] pt-[92px] text-[#304158]">
+    <footer className="bg-[#dbeaff] px-6 pb-[70px] pt-[72px] text-[#304158]">
       <div className="mx-auto grid max-w-[1228px] gap-14 md:grid-cols-[1.6fr_0.8fr_0.8fr]">
         <div>
           <Image
             src="/figma-assets/nephroreach-logo.png"
             alt="NephroReach"
-            width={132}
-            height={84}
-            className="h-[72px] w-auto"
+            width={86}
+            height={68}
+            className="h-[66px] w-auto"
           />
-          <p className="mt-8 max-w-[430px] text-[18px] font-medium leading-[1.45]">
+          <p className="mt-6 max-w-[430px] text-[16px] font-medium leading-[1.45]">
             A non-clinical educational engagement platform for SMS check-ins,
             digital journaling, structured learning, and monthly live classes.
           </p>
-          <div className="mt-7 flex gap-4">
-            {["t", "◎", "in", "▶"].map((item) => (
+          <div className="mt-6 flex gap-4">
+            {socialItems.map((item) => (
               <a
                 key={item}
                 href="#"
@@ -126,8 +128,8 @@ export function Footer() {
           items={["Privacy Policy", "Terms of Service", "Contact"]}
         />
       </div>
-      <p className="mt-[100px] text-center text-[16px] font-semibold">
-        © 2025 DropClicker. All rights reserved.
+      <p className="mt-[52px] text-center text-[16px] font-semibold">
+        (c) 2025 DropClicker. All rights reserved.
       </p>
     </footer>
   );
@@ -137,7 +139,7 @@ function FooterColumn({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="pt-3">
       <h3 className="text-[17px] font-bold text-[#1f2d46]">{title}</h3>
-      <ul className="mt-8 space-y-7 text-[16px] font-medium">
+      <ul className="mt-8 space-y-6 text-[16px] font-medium">
         {items.map((item) => (
           <li key={item}>
             <a href="#" className="hover:text-[#2563eb]">
