@@ -3,22 +3,74 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 const navItems = [
-  { label: "Home", href: "/", left: 0, width: 45 },
-  { label: "FAQ", href: "/faq", left: 78, width: 31 },
-  { label: "About us", href: "#", left: 142, width: 68 },
-  { label: "Pricing", href: "/pricing", left: 240, width: 53 },
+  { label: "Home", href: "/", left: 858, width: 45 },
+  { label: "FAQ", href: "/faq", left: 936, width: 31 },
+  { label: "About us", href: "#", left: 1000, width: 68 },
+  { label: "Pricing", href: "/pricing", left: 1099, width: 53 },
 ];
 
 const socialItems = ["t", "o", "in", ">"];
 
 export function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-[100.962px] bg-white">
+    <header className="fixed inset-x-0 top-0 z-50 h-[101px] bg-white">
       <div className="relative mx-auto h-full w-full max-w-[1440px]">
+        <Image
+          src="/figma-assets/header.svg"
+          alt=""
+          width={1440}
+          height={101}
+          priority
+          className="hidden h-full w-full object-fill min-[1200px]:block"
+        />
         <Link
           href="/"
           aria-label="NephroReach home"
-          className="absolute left-6 top-[16.53px] block h-[67.882px] w-[86px] min-[1200px]:left-[70px]"
+          className="absolute top-[16.5px] hidden h-[68px] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] min-[1200px]:block"
+          style={{
+            left: `${(70 / 1440) * 100}%`,
+            width: `${(86 / 1440) * 100}%`,
+          }}
+        />
+        <nav
+          aria-label="Primary navigation"
+          className="absolute inset-0 hidden min-[1200px]:block"
+        >
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              aria-label={item.label}
+              className="absolute top-[38px] h-8 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb]"
+              style={{
+                left: `${(item.left / 1440) * 100}%`,
+                width: `${(item.width / 1440) * 100}%`,
+              }}
+            />
+          ))}
+          <Link
+            href="#"
+            aria-label="Log in"
+            className="absolute top-[38px] h-8 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb]"
+            style={{
+              left: `${(1197 / 1440) * 100}%`,
+              width: `${(46 / 1440) * 100}%`,
+            }}
+          />
+          <Link
+            href="#"
+            aria-label="Try it free"
+            className="absolute top-[24.47px] h-[52px] rounded-[12px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb]"
+            style={{
+              left: `${(1264 / 1440) * 100}%`,
+              width: `${(106 / 1440) * 100}%`,
+            }}
+          />
+        </nav>
+        <Link
+          href="/"
+          aria-label="NephroReach home"
+          className="absolute left-6 top-[16.53px] block h-[67.882px] w-[86px] min-[1200px]:hidden"
         >
           <Image
             src="/figma-assets/nephroreach-logo.png"
@@ -29,27 +81,6 @@ export function Header() {
             priority
           />
         </Link>
-        <nav className="absolute left-[858px] top-[24.471px] hidden h-[52px] w-[512px] text-[15.5px] font-[500] leading-[20.93px] tracking-[0.155px] text-[#25221e] min-[1200px]:block [font-family:var(--font-inter)]">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="absolute top-[14.54px] flex h-[21px] items-center hover:text-[#2563eb]"
-              style={{ left: item.left, width: item.width }}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <a
-            href="#"
-            className="absolute left-[338px] top-[14.54px] flex h-[21px] w-[46px] items-center hover:text-[#2563eb]"
-          >
-            Log in
-          </a>
-          <Button href="#" className="absolute left-[406px] top-0 w-[106px]">
-            Try it free
-          </Button>
-        </nav>
         <Button href="#" className="absolute right-6 top-6 min-[1200px]:hidden">
           Try it free
         </Button>
