@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Fragment } from "react";
-import { Button, Footer, Header, QuestionBanner } from "./_components/SiteChrome";
+import { Button, Footer, QuestionBanner } from "../_components/SiteChrome";
 
 const workflowSteps = [
   {
@@ -119,7 +119,6 @@ const benefits = [
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white pt-[100.962px] text-[#0f172a]">
-      <Header />
       <Hero />
       <Workflow />
       <Included />
@@ -192,7 +191,10 @@ function SectionHeading({
 
 function Workflow() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-6 xl:h-[594px] xl:px-[71px] xl:py-20">
+    <section
+      id="how-it-works"
+      className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-6 xl:h-[594px] xl:px-[71px] xl:py-20"
+    >
       <div className="mx-auto flex max-w-[920px] flex-col items-center justify-center text-center xl:h-[136px] xl:max-w-none">
         <p className="text-[16px] font-bold leading-7 tracking-[0.09px] text-[#2563eb] md:text-[18px]">
           How we work

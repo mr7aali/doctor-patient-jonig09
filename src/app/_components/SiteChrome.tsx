@@ -1,14 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { HeaderNav } from "./HeaderNav";
 
-const socialItems = ["t", "o", "in", ">"];
-
-const navItems = [
-  { label: "Home", href: "/", left: 858, width: 45 },
-  { label: "FAQ", href: "/faq", left: 936, width: 31 },
-  { label: "About us", href: "#", left: 1000, width: 68 },
-  { label: "Pricing", href: "/pricing", left: 1099, width: 53 },
+const socialItems = [
+  { label: "Twitter", src: "/figma-assets/footer-twitter.svg" },
+  { label: "Instagram", src: "/figma-assets/footer-instagram.svg" },
+  { label: "LinkedIn", src: "/figma-assets/footer-linkedin.svg" },
+  { label: "YouTube", src: "/figma-assets/footer-youtube.svg" },
 ];
 
 export function Header() {
@@ -30,7 +29,10 @@ export function Header() {
             priority
           />
         </Link>
-        <Button href="/signup" className="absolute right-6 top-6 min-[1200px]:hidden">
+        <Button
+          href="/signup"
+          className="absolute right-6 top-6 min-[1200px]:hidden"
+        >
           Try it free
         </Button>
       </div>
@@ -46,7 +48,7 @@ function DesktopHeader({ className = "" }: { className?: string }) {
       <Link
         href="/"
         aria-label="NephroReach home"
-        className="absolute left-[70px] top-[16.53px] block h-[67.882px] w-[86px]"
+        className="absolute left-[70px] top-[16.53px] block h-[67.882px] w-[86px] z-10"
       >
         <Image
           src="/figma-assets/nephroreach-logo.png"
@@ -62,16 +64,7 @@ function DesktopHeader({ className = "" }: { className?: string }) {
         aria-label="Primary navigation"
         className="absolute inset-0 text-[15.5px] font-medium leading-[20.93px] tracking-[0.155px] [font-family:var(--font-inter)]"
       >
-        {navItems.map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            className="absolute top-[39px] flex h-[21px] items-center whitespace-nowrap transition-colors hover:text-[var(--header-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--header-accent)]"
-            style={{ left: item.left, width: item.width }}
-          >
-            {item.label}
-          </Link>
-        ))}
+        <HeaderNav />
         <span
           aria-hidden="true"
           className="absolute left-[1173px] top-[38.471px] h-6 w-px bg-[#25221e]/[0.18]"
@@ -128,7 +121,7 @@ export function QuestionBanner() {
           <br />
           new courses &amp; study?
         </h2>
-        <Button href="#" className="mt-8 h-[52px] w-[116px] px-0 md:mt-7">
+        <Button href="/contact" className="mt-8 h-[52px] w-[116px] px-0 md:mt-7">
           Contact Us
         </Button>
       </div>
@@ -154,26 +147,34 @@ export function Footer() {
           </p>
           <div className="mt-6 flex h-9 w-[180px] gap-3 xl:absolute xl:left-0 xl:top-[151.882px] xl:mt-0">
             {socialItems.map((item) => (
-              <a
-                key={item}
+              <Link
+                key={item.label}
                 href="#"
-                aria-label="Social link"
-                className="flex h-9 w-9 items-center justify-center rounded-[9px] bg-[#121722] text-[12px] font-bold leading-none text-white"
+                aria-label={item.label}
+                className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-[#111827] transition hover:bg-[#2563eb]"
               >
-                {item}
-              </a>
+                <Image src={item.src} alt="" width={16} height={16} className="size-4" />
+              </Link>
             ))}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-12 sm:gap-20 xl:absolute xl:left-[796px] xl:top-0 xl:flex xl:h-full xl:w-[502px] xl:gap-0">
           <FooterColumn
             title="Platform"
-            items={["How it Works", "Product", "Pricing", "Resources"]}
+            items={[
+              { label: "How it Works", href: "/#how-it-works" },
+              { label: "Product", href: "/" },
+              { label: "Pricing", href: "/pricing" },
+              { label: "Resources", href: "/faq" },
+            ]}
           />
           <FooterColumn
             title="Legal"
-            items={["Privacy Policy", "Terms of Service", "Contact"]}
-            className="xl:ml-[164px]"
+            items={[
+              { label: "Privacy Policy", href: "#" },
+              { label: "Terms of Service", href: "#" },
+              { label: "Contact", href: "/contact" },
+            ]}
           />
         </div>
       </div>
@@ -190,20 +191,20 @@ function FooterColumn({
   className = "",
 }: {
   title: string;
-  items: string[];
+  items: { label: string; href: string }[];
   className?: string;
 }) {
   return (
     <div
-      className={`w-[88px] text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)] ${className}`}
+      className={`w-full text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)] xl:w-[250px] ${className}`}
     >
       <h3 className="text-[#0f172a]">{title}</h3>
       <ul className="mt-4 space-y-4">
         {items.map((item) => (
-          <li key={item}>
-            <a href="#" className="hover:text-[#2563eb]">
-              {item}
-            </a>
+          <li key={item.label}>
+            <Link href={item.href} className="hover:text-[#2563eb]">
+              {item.label}
+            </Link>
           </li>
         ))}
       </ul>

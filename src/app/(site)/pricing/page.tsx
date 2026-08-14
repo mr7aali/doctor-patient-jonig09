@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button, Footer, Header } from "../_components/SiteChrome";
+import { Button, Footer } from "../../_components/SiteChrome";
 
 const features = [
   "Digital Journal",
@@ -33,7 +33,6 @@ const pricingPlans = [
 export default function PricingPage() {
   return (
     <main className="min-h-screen bg-white pt-[100.962px] text-[#0f172a]">
-      <Header />
       <Hero />
       <PricingSection />
       <Footer />

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { Button, Footer, Header, QuestionBanner } from "../_components/SiteChrome";
 
 const faqs = [
   {
@@ -51,45 +50,7 @@ const faqs = [
 
 const categories = ["All", ...Array.from(new Set(faqs.map((faq) => faq.category)))];
 
-export default function FAQPage() {
-  return (
-    <main className="min-h-screen bg-white pt-[100.962px] text-[#0f172a]">
-      <Header />
-      <Hero />
-      <FAQList />
-      <QuestionBanner />
-      <Footer />
-    </main>
-  );
-}
-
-function Hero() {
-  return (
-    <section className="relative h-[266px] overflow-hidden bg-[linear-gradient(191.28deg,#e5e7eb_15.931%,#d7edff_81.582%)]">
-      <Image
-        src="/figma-assets/faq-hero-shape.svg"
-        alt=""
-        width={1000}
-        height={1000}
-        className="pointer-events-none absolute right-8 top-[13.04px] hidden size-[1000px] opacity-10 md:block"
-        priority
-      />
-      <div className="relative mx-auto flex h-full max-w-[1440px] flex-col items-start justify-center px-6 py-10 sm:px-[70px] md:justify-start md:py-14">
-        <h1 className="max-w-[760px] text-[32px] font-[510] leading-normal text-[#2f2a26] [font-family:var(--font-sf-pro)]">
-          Frequently Asked Questions
-        </h1>
-        <p className="mt-4 max-w-[680px] text-[18px] font-[510] leading-7 tracking-[0.09px] text-[#344056] [font-family:var(--font-sf-pro)]">
-          Simple answers about privacy, data, and how tracking works.
-        </p>
-        <Button href="#" className="mt-6 h-12 w-[139px] px-[14px]">
-          Start Tracking
-        </Button>
-      </div>
-    </section>
-  );
-}
-
-function FAQList() {
+export function FAQList() {
   const [openQuestion, setOpenQuestion] = useState(faqs[0].question);
   const [activeCategory, setActiveCategory] = useState("All");
   const [query, setQuery] = useState("");
@@ -145,77 +106,78 @@ function FAQList() {
         </div>
 
         <div className="flex flex-col gap-4">
-        {filteredFaqs.map((faq) => {
-          const isOpen = openQuestion === faq.question;
+          {filteredFaqs.map((faq) => {
+            const isOpen = openQuestion === faq.question;
+            const answerId = `faq-answer-${faq.question.replaceAll(" ", "-").toLowerCase()}`;
 
-          return (
-          <article
-            key={faq.question}
-            className={`rounded-lg border border-[#e2e8f0] bg-[#d7edff] px-5 py-4 sm:px-7 ${
-              isOpen ? "min-h-[115px]" : "min-h-20"
-            }`}
-          >
-            <div className="flex min-h-12 items-center justify-between gap-4">
-              <div className="min-w-0">
-                <p className="mb-1 text-[13px] font-[510] leading-5 tracking-[0.07px] text-[#2563eb] [font-family:var(--font-sf-pro)]">
-                  {faq.category}
-                </p>
-                <h2 className="text-[20px] font-medium leading-7 tracking-[0.1px] text-[#0f172a] [font-family:var(--font-poppins)]">
-                  {faq.question}
-                </h2>
-              </div>
-              <button
-                type="button"
-                aria-expanded={isOpen}
-                aria-controls={`faq-answer-${faq.question.replaceAll(" ", "-").toLowerCase()}`}
-                aria-label={`${isOpen ? "Collapse" : "Open"} ${faq.question}`}
-                onClick={() => setOpenQuestion(isOpen ? "" : faq.question)}
-                className="relative flex size-12 shrink-0 items-center justify-center rounded-[30px]"
+            return (
+              <article
+                key={faq.question}
+                className={`rounded-lg border border-[#e2e8f0] bg-[#d7edff] px-5 py-4 sm:px-7 ${
+                  isOpen ? "min-h-[115px]" : "min-h-20"
+                }`}
               >
+                <div className="flex min-h-12 items-center justify-between gap-4">
+                  <div className="min-w-0">
+                    <p className="mb-1 text-[13px] font-[510] leading-5 tracking-[0.07px] text-[#2563eb] [font-family:var(--font-sf-pro)]">
+                      {faq.category}
+                    </p>
+                    <h2 className="text-[20px] font-medium leading-7 tracking-[0.1px] text-[#0f172a] [font-family:var(--font-poppins)]">
+                      {faq.question}
+                    </h2>
+                  </div>
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={answerId}
+                    aria-label={`${isOpen ? "Collapse" : "Open"} ${faq.question}`}
+                    onClick={() => setOpenQuestion(isOpen ? "" : faq.question)}
+                    className="relative flex size-12 shrink-0 items-center justify-center rounded-[30px]"
+                  >
+                    {isOpen ? (
+                      <>
+                        <span className="absolute inset-0 rounded-[30px] bg-[#2563eb] shadow-[inset_0_-0.496px_0_#b8a4e3,inset_0_0.496px_0_rgba(255,255,255,0.12)]" />
+                        <Image
+                          src="/figma-assets/faq-open-icon.svg"
+                          alt=""
+                          width={17}
+                          height={12}
+                          className="relative z-10 h-[11.37px] w-[16.107px]"
+                        />
+                      </>
+                    ) : (
+                      <Image
+                        src="/figma-assets/faq-closed-icon.svg"
+                        alt=""
+                        width={51}
+                        height={51}
+                        className="size-[50.662px]"
+                      />
+                    )}
+                  </button>
+                </div>
                 {isOpen ? (
-                  <>
-                    <span className="absolute inset-0 rounded-[30px] bg-[#2563eb] shadow-[inset_0_-0.496px_0_#b8a4e3,inset_0_0.496px_0_rgba(255,255,255,0.12)]" />
-                    <Image
-                      src="/figma-assets/faq-open-icon.svg"
-                      alt=""
-                      width={17}
-                      height={12}
-                      className="relative z-10 h-[11.37px] w-[16.107px]"
-                    />
-                  </>
-                ) : (
-                  <Image
-                    src="/figma-assets/faq-closed-icon.svg"
-                    alt=""
-                    width={51}
-                    height={51}
-                    className="size-[50.662px]"
-                  />
-                )}
-              </button>
-            </div>
-            {isOpen ? (
-              <p
-                id={`faq-answer-${faq.question.replaceAll(" ", "-").toLowerCase()}`}
-                className="mt-[7px] max-w-[754px] text-[18px] font-normal leading-7 tracking-[0.09px] text-[#344056] [font-family:var(--font-poppins)]"
-              >
-                {faq.answer}
-              </p>
-            ) : null}
-          </article>
-          );
-        })}
+                  <p
+                    id={answerId}
+                    className="mt-[7px] max-w-[754px] text-[18px] font-normal leading-7 tracking-[0.09px] text-[#344056] [font-family:var(--font-poppins)]"
+                  >
+                    {faq.answer}
+                  </p>
+                ) : null}
+              </article>
+            );
+          })}
 
-        {filteredFaqs.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-[#cbd5ed] bg-[#f8fafc] px-6 py-10 text-center">
-            <h2 className="text-[20px] font-medium leading-7 tracking-[0.1px] text-[#0f172a] [font-family:var(--font-poppins)]">
-              No questions found
-            </h2>
-            <p className="mt-2 text-[16px] leading-6 text-[#344056] [font-family:var(--font-sf-pro)]">
-              Try another keyword or choose a different category.
-            </p>
-          </div>
-        ) : null}
+          {filteredFaqs.length === 0 ? (
+            <div className="rounded-lg border border-dashed border-[#cbd5ed] bg-[#f8fafc] px-6 py-10 text-center">
+              <h2 className="text-[20px] font-medium leading-7 tracking-[0.1px] text-[#0f172a] [font-family:var(--font-poppins)]">
+                No questions found
+              </h2>
+              <p className="mt-2 text-[16px] leading-6 text-[#344056] [font-family:var(--font-sf-pro)]">
+                Try another keyword or choose a different category.
+              </p>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
