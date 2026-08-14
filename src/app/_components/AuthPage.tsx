@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
 type AuthField = {
   label: string;
@@ -25,10 +26,10 @@ type AuthPageProps = {
 const artByVariant = {
   signin: {
     src: "/figma-assets/signin-art.png",
-    backgroundSrc: "/figma-assets/signin-bg.png",
+    backgroundSrc: null,
+    canvasHeight: 1024,
     height: 960,
     wrapperHeight: "lg:h-[960px]",
-    containerHeight: "lg:min-h-[1024px]",
     formOffset: "lg:pt-[109.059px]",
     leftHeight: "lg:h-[960px]",
     leftWidth: "lg:w-[532px]",
@@ -39,9 +40,9 @@ const artByVariant = {
   signup: {
     src: "/figma-assets/signup-art.png",
     backgroundSrc: null,
+    canvasHeight: 1087,
     height: 1023,
     wrapperHeight: "lg:h-[1023px]",
-    containerHeight: "lg:min-h-[1087px]",
     formOffset: "lg:pt-0",
     leftHeight: "lg:h-[1023px]",
     leftWidth: "lg:w-[528px]",
@@ -64,33 +65,41 @@ export function AuthPage({
   showCompliance = false,
 }: AuthPageProps) {
   const art = artByVariant[variant];
+  const authCanvasStyle = {
+    "--auth-scale": `min(calc(100vw / 1440px), calc(100vh / ${art.canvasHeight}px))`,
+  } as CSSProperties;
 
   return (
-    <main
-      className={`relative min-h-screen overflow-hidden bg-white text-[#0f172a] ${art.containerHeight}`}
-    >
-      {art.backgroundSrc ? (
-        <Image
-          src={art.backgroundSrc}
-          alt=""
-          width={1440}
-          height={953}
-          className="pointer-events-none absolute left-1/2 top-0 hidden h-[953px] w-[1440px] max-w-none -translate-x-1/2 object-fill lg:block"
-          priority
-        />
-      ) : (
-        <div className="pointer-events-none absolute left-[-244.4375px] top-[-181px] hidden h-[1134px] w-[2143.26px] lg:block">
-          <div className="absolute right-[-141.75px] top-[-141.75px] size-[992.25px] rounded-[496.125px] bg-[#e7ff51] blur-[198.45px]" />
-          <div className="absolute right-[640.71px] top-[-216.88px] size-[992.25px] rounded-[496.125px] bg-[#55f5a3] blur-[198.45px]" />
-        </div>
-      )}
-      <div className="pointer-events-none absolute inset-0 bg-white/0 lg:hidden" />
+    <main className="relative h-screen min-h-0 overflow-hidden bg-white text-[#0f172a]">
+      <div
+        className={`relative mx-auto flex h-full w-full max-w-[1440px] flex-col gap-8 px-6 py-5 sm:gap-10 sm:py-8 lg:absolute lg:left-1/2 lg:top-0 lg:block lg:w-[1440px] lg:max-w-none lg:origin-top lg:[transform:translateX(-50%)_scale(var(--auth-scale))] lg:px-0 lg:py-0 ${art.mainHeight}`}
+        style={authCanvasStyle}
+      >
+        {art.backgroundSrc ? (
+          <Image
+            src={art.backgroundSrc}
+            alt=""
+            width={1440}
+            height={953}
+            className="pointer-events-none absolute left-0 top-0 hidden h-[953px] w-[1440px] max-w-none object-fill lg:block"
+            priority
+          />
+        ) : (
+          <div className="pointer-events-none absolute left-[-244.4375px] top-[-181px] hidden h-[1134px] w-[2143.26px] lg:block">
+            <div className="absolute right-[-141.75px] top-[-141.75px] size-[992.25px] rounded-[496.125px] bg-[#e7ff51] blur-[198.45px]" />
+            <div className="absolute right-[640.71px] top-[-216.88px] size-[992.25px] rounded-[496.125px] bg-[#55f5a3] blur-[198.45px]" />
+          </div>
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-white/0 lg:hidden" />
 
-      <div className={`relative mx-auto flex max-w-[1440px] flex-col gap-10 px-6 py-8 lg:block lg:px-0 lg:py-0 ${art.mainHeight}`}>
         <section
-          className={`relative z-10 mx-auto w-full max-w-[532px] ${art.leftWidth} ${art.leftHeight} lg:absolute lg:left-8 lg:top-8`}
+          className={`relative z-10 mx-0 w-full max-w-[342px] sm:mx-auto sm:max-w-[532px] ${art.leftWidth} ${art.leftHeight} lg:absolute lg:left-8 lg:top-8`}
         >
-          <Link href="/" aria-label="NephroReach home" className="block h-[67.882px] w-[86px]">
+          <Link
+            href="/"
+            aria-label="NephroReach home"
+            className="block h-[60px] w-[76px] lg:h-[67.882px] lg:w-[86px]"
+          >
             <Image
               src="/figma-assets/nephroreach-logo.png"
               alt="NephroReach"
@@ -143,20 +152,28 @@ function AuthForm({
   compact,
 }: Omit<AuthPageProps, "variant" | "showCompliance"> & { compact: boolean }) {
   return (
-    <div className={`flex flex-col px-0 sm:px-5 ${compact ? "gap-3" : "gap-10"}`}>
-      <div className={`flex flex-col items-start ${subtitle ? "gap-7" : "gap-0"}`}>
-        <h1 className="w-fit origin-left text-center text-[36px] font-medium leading-10 tracking-[0.18px] text-[#0f172a] [font-family:var(--font-sf-pro)] [transform:scaleX(0.92)]">
+    <div
+      className={`flex w-full max-w-full flex-col px-0 sm:px-5 ${
+        compact ? "gap-3" : "gap-7 sm:gap-10 lg:gap-10 [@media(max-height:700px)]:gap-5"
+      }`}
+    >
+      <div
+        className={`flex flex-col items-start ${
+          subtitle ? "gap-4 sm:gap-7 lg:gap-7 [@media(max-height:700px)]:gap-3" : "gap-0"
+        }`}
+      >
+        <h1 className="w-fit origin-left text-center text-[32px] font-medium leading-9 tracking-[0.18px] text-[#0f172a] [font-family:var(--font-sf-pro)] [transform:scaleX(0.92)] sm:text-[36px] sm:leading-10 lg:text-[36px] lg:leading-10">
           {title}
         </h1>
         {subtitle ? (
-          <p className="text-[18px] font-[510] leading-7 tracking-[0.09px] text-[#0f172a] [font-family:var(--font-sf-pro)]">
+          <p className="text-[16px] font-[510] leading-6 tracking-[0.09px] text-[#0f172a] [font-family:var(--font-sf-pro)] sm:text-[18px] sm:leading-7 lg:text-[18px] lg:leading-7">
             {subtitle}
           </p>
         ) : null}
       </div>
 
-      <form className="flex flex-col items-end gap-6">
-        <div className="flex w-full flex-col gap-[14px]">
+      <form className="flex w-full flex-col items-end gap-5 sm:gap-6 lg:gap-6">
+        <div className="flex w-full flex-col gap-2.5 sm:gap-[14px] lg:gap-[14px]">
           {fields.map((field) => (
             <AuthTextField key={`${field.label}-${field.placeholder}`} field={field} />
           ))}
@@ -169,8 +186,8 @@ function AuthForm({
         </button>
       </form>
 
-      <div className="flex w-full flex-col gap-6">
-        <div className="flex w-full items-center justify-center gap-4 py-2.5">
+      <div className="flex w-full flex-col gap-5 sm:gap-6 lg:gap-6">
+        <div className="flex w-full items-center justify-center gap-4 py-2 sm:py-2.5 lg:py-2.5">
           <Image
             src="/figma-assets/auth-divider-line.svg"
             alt=""
