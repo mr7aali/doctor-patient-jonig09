@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+const socialItems = ["t", "o", "in", ">"];
+
 const navItems = [
   { label: "Home", href: "/", left: 858, width: 45 },
   { label: "FAQ", href: "/faq", left: 936, width: 31 },
@@ -9,64 +11,11 @@ const navItems = [
   { label: "Pricing", href: "/pricing", left: 1099, width: 53 },
 ];
 
-const socialItems = ["t", "o", "in", ">"];
-
 export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-[101px] bg-white">
       <div className="relative mx-auto h-full w-full max-w-[1440px]">
-        <Image
-          src="/figma-assets/header.svg"
-          alt=""
-          width={1440}
-          height={101}
-          priority
-          className="hidden h-full w-full object-fill min-[1200px]:block"
-        />
-        <Link
-          href="/"
-          aria-label="NephroReach home"
-          className="absolute top-[16.5px] hidden h-[68px] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] min-[1200px]:block"
-          style={{
-            left: `${(70 / 1440) * 100}%`,
-            width: `${(86 / 1440) * 100}%`,
-          }}
-        />
-        <nav
-          aria-label="Primary navigation"
-          className="absolute inset-0 hidden min-[1200px]:block"
-        >
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              aria-label={item.label}
-              className="absolute top-[38px] h-8 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb]"
-              style={{
-                left: `${(item.left / 1440) * 100}%`,
-                width: `${(item.width / 1440) * 100}%`,
-              }}
-            />
-          ))}
-          <Link
-            href="#"
-            aria-label="Log in"
-            className="absolute top-[38px] h-8 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb]"
-            style={{
-              left: `${(1197 / 1440) * 100}%`,
-              width: `${(46 / 1440) * 100}%`,
-            }}
-          />
-          <Link
-            href="#"
-            aria-label="Try it free"
-            className="absolute top-[24.47px] h-[52px] rounded-[12px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb]"
-            style={{
-              left: `${(1264 / 1440) * 100}%`,
-              width: `${(106 / 1440) * 100}%`,
-            }}
-          />
-        </nav>
+        <DesktopHeader className="hidden min-[1200px]:block" />
         <Link
           href="/"
           aria-label="NephroReach home"
@@ -86,6 +35,61 @@ export function Header() {
         </Button>
       </div>
     </header>
+  );
+}
+
+function DesktopHeader({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`relative h-full w-full text-[#25221e] [--header-accent:#2563eb] ${className}`}
+    >
+      <Link
+        href="/"
+        aria-label="NephroReach home"
+        className="absolute left-[70px] top-[16.53px] block h-[67.882px] w-[86px]"
+      >
+        <Image
+          src="/figma-assets/nephroreach-logo.png"
+          alt="NephroReach"
+          width={86}
+          height={68}
+          className="h-full w-full object-contain"
+          priority
+        />
+      </Link>
+
+      <nav
+        aria-label="Primary navigation"
+        className="absolute inset-0 text-[15.5px] font-medium leading-[20.93px] tracking-[0.155px] [font-family:var(--font-inter)]"
+      >
+        {navItems.map((item) => (
+          <Link
+            key={item.label}
+            href={item.href}
+            className="absolute top-[39px] flex h-[21px] items-center whitespace-nowrap transition-colors hover:text-[var(--header-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--header-accent)]"
+            style={{ left: item.left, width: item.width }}
+          >
+            {item.label}
+          </Link>
+        ))}
+        <span
+          aria-hidden="true"
+          className="absolute left-[1173px] top-[38.471px] h-6 w-px bg-[#25221e]/[0.18]"
+        />
+        <Link
+          href="#"
+          className="absolute left-[1197px] top-[39px] flex h-[21px] w-[52px] items-center whitespace-nowrap transition-colors hover:text-[var(--header-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--header-accent)]"
+        >
+          Log in
+        </Link>
+        <Link
+          href="#"
+          className="absolute left-[1264px] top-[24.471px] flex h-[52px] w-[106px] items-center justify-center rounded-[12px] bg-[var(--header-accent)] text-[16px] font-medium leading-6 tracking-[0.08px] text-white shadow-[inset_0_-1px_0_#dbe9fe] transition-colors hover:bg-[#1d4ed8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--header-accent)] [font-family:var(--font-work-sans)]"
+        >
+          Try it free
+        </Link>
+      </nav>
+    </div>
   );
 }
 
