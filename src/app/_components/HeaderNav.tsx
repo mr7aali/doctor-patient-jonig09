@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { label: "Home", href: "/", left: 858, width: 45 },
   { label: "FAQ", href: "/faq", left: 936, width: 31 },
-  { label: "About us", href: "#", left: 1000, width: 68 },
+  { label: "About us", href: "/about", left: 1000, width: 68 },
   { label: "Pricing", href: "/pricing", left: 1099, width: 53 },
 ];
 
 function isActivePath(pathname: string, href: string) {
-  if (href === "/" || href === "#") {
+  if (href === "/") {
     return pathname === href;
   }
 

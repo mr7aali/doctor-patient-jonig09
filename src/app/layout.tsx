@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Inter, Poppins, Work_Sans } from "next/font/google";
+import { DM_Sans, Geist_Mono, Inter, Poppins, Work_Sans } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,6 +21,13 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -37,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${workSans.variable} ${poppins.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${workSans.variable} ${poppins.variable} ${dmSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
