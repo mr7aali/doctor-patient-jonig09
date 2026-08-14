@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Fragment } from "react";
 import { Button, Footer, Header, QuestionBanner } from "./_components/SiteChrome";
 
 const workflowSteps = [
@@ -6,25 +7,25 @@ const workflowSteps = [
     title: "Sign Up",
     copy: "Choose your membership level and securely add your phone number.",
     image: "/figma-assets/image1_8359_18243.png",
-    tint: "bg-[#f4faf7]",
+    tint: "bg-[#f4fbf7]",
   },
   {
     title: "Get Your Member ID",
     copy: "Receive a unique ID for your NephroReach account.",
     image: "/figma-assets/image2_8359_18243.png",
-    tint: "bg-[#fbfff3]",
+    tint: "bg-[#f6faeb]",
   },
   {
     title: "Learn & Journal",
     copy: "Use your journal, prompts, and 04-week education library.",
     image: "/figma-assets/image3_8359_18243.png",
-    tint: "bg-[#fff8e8]",
+    tint: "bg-[#fff9eb]",
   },
   {
     title: "Receive SMS Check-Ins",
     copy: "Receive automated weekly SMS check-ins and class reminders.",
     image: "/figma-assets/image4_8359_18243.png",
-    tint: "bg-[#fff4ee]",
+    tint: "bg-[#fff6f0]",
   },
 ];
 
@@ -191,41 +192,64 @@ function SectionHeading({
 
 function Workflow() {
   return (
-    <section className="mx-auto max-w-[1228px] px-4 pt-20 sm:px-6 md:pt-[110px] xl:min-h-[594px] min-[1370px]:max-w-[1298px] min-[1370px]:pt-[80px]">
-      <SectionHeading
-        eyebrow="How we work"
-        title="How NephroReach Works"
-        copy="Choose the path that fits your goals. Simple, transparent pricing."
-      />
-      <div className="mt-12 grid gap-8 sm:gap-12 md:mt-14 md:grid-cols-2 xl:grid-cols-4 xl:gap-8 min-[1370px]:mt-10 min-[1370px]:grid-cols-[270.5px_270.5px_270.5px_270.5px] min-[1370px]:gap-[72px]">
+    <section className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-6 xl:h-[594px] xl:px-[71px] xl:py-20">
+      <div className="mx-auto flex max-w-[920px] flex-col items-center justify-center text-center xl:h-[136px] xl:max-w-none">
+        <p className="text-[16px] font-bold leading-7 tracking-[0.09px] text-[#2563eb] md:text-[18px]">
+          How we work
+        </p>
+        <h2 className="mt-4 text-[30px] font-semibold leading-tight tracking-[0.18px] text-[#0f172a] md:mt-6 md:text-[36px] md:leading-10">
+          How NephroReach Works
+        </h2>
+        <p className="mt-3 text-[18px] font-normal leading-7 tracking-[0.12px] text-[#344056] md:text-[24px] md:leading-8">
+          Choose the path that fits your goals. Simple, transparent pricing.
+        </p>
+      </div>
+      <div className="mt-12 grid gap-8 sm:gap-12 md:grid-cols-2 xl:mt-10 xl:flex xl:h-[258px] xl:items-center xl:gap-[14px]">
         {workflowSteps.map((step, index) => (
-          <article key={step.title} className="relative">
-            <div className="overflow-hidden rounded-[10px] border border-[#25221e]/20 bg-white shadow-sm min-[1370px]:h-[258px]">
-              <div
-                className={`flex h-[126px] items-center justify-center ${step.tint}`}
-              >
+          <Fragment key={step.title}>
+            <article className="min-w-0 overflow-hidden rounded-[10px] border border-[rgba(37,34,30,0.18)] bg-white p-px shadow-[0_1px_0_rgba(37,34,30,0.04)] xl:h-full xl:flex-1">
+              <div className={`flex h-[125px] items-center justify-center rounded-t-[9px] ${step.tint}`}>
                 <Image src={step.image} alt="" width={88} height={88} />
               </div>
-              <div className="min-h-[130px] border-t border-[#25221e]/20 px-[26px] pb-8 pt-[31px]">
-                <h3 className="text-[18px] font-bold">{step.title}</h3>
-                <p className="mt-4 text-[17px] leading-[1.45] text-[#1f2d46]/90 md:mt-5 md:text-[18px]">
+              <div className="h-px w-full bg-[rgba(37,34,30,0.18)]" />
+              <div className="px-4 pb-2 pt-4">
+                <h3 className="text-[16px] font-bold leading-6 tracking-[0.08px] text-[#0f172a]">
+                  {step.title}
+                </h3>
+              </div>
+              <div className="px-4 pb-4">
+                <p className="text-[14px] font-medium leading-5 tracking-[0.07px] text-[#344056]">
                   {step.copy}
                 </p>
               </div>
-            </div>
-            {index < workflowSteps.length - 1 ? (
-              <div className="pointer-events-none absolute left-[calc(100%+14px)] top-[107px] hidden w-[44px] items-center min-[1370px]:flex">
-                <span className="h-px flex-1 border-t-2 border-dotted border-[#0f172a]" />
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#111827] text-3xl text-white">
-                  &gt;
-                </span>
-                <span className="h-px flex-1 border-t-2 border-dotted border-[#0f172a]" />
-              </div>
-            ) : null}
-          </article>
+            </article>
+            {index < workflowSteps.length - 1 ? <WorkflowArrow /> : null}
+          </Fragment>
         ))}
       </div>
     </section>
+  );
+}
+
+function WorkflowArrow() {
+  return (
+    <div className="relative hidden h-11 w-11 shrink-0 items-center justify-center xl:flex">
+      <Image
+        src="/figma-assets/workflow-line.svg"
+        alt=""
+        width={68}
+        height={2}
+        className="absolute left-1/2 top-[23px] z-0 h-0.5 w-[68px] -translate-x-1/2"
+      />
+      <span className="absolute inset-0 z-10 rounded-[30px] bg-[#111827]" />
+      <Image
+        src="/figma-assets/workflow-arrow-right.svg"
+        alt=""
+        width={24}
+        height={24}
+        className="relative z-20 h-6 w-6"
+      />
+    </div>
   );
 }
 
