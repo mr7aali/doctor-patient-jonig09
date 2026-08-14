@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button, Footer, Header, QuestionBanner } from "../_components/SiteChrome";
 
 const faqs = [
@@ -28,16 +29,23 @@ export default function FAQPage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#d8ecfb] min-[1370px]:h-[266px]">
-      <div className="absolute right-[34px] top-4 hidden h-[250px] w-[760px] rounded-t-2xl bg-[#d7d8eb]/75 md:block [clip-path:polygon(31%_0,100%_0,100%_100%,0_100%)]" />
-      <div className="relative mx-auto flex min-h-[300px] max-w-[1310px] flex-col items-start justify-center px-4 py-12 sm:px-6 md:h-[266px] md:min-h-0 md:py-0 min-[1370px]:max-w-[1300px] min-[1370px]:justify-start min-[1370px]:pt-14">
-        <h1 className="max-w-[760px] text-[32px] font-semibold leading-tight text-[#25221e] sm:text-[38px] min-[1370px]:leading-[38px]">
+    <section className="relative h-[266px] overflow-hidden bg-[linear-gradient(191.28deg,#e5e7eb_15.931%,#d7edff_81.582%)]">
+      <Image
+        src="/figma-assets/faq-hero-shape.svg"
+        alt=""
+        width={1000}
+        height={1000}
+        className="pointer-events-none absolute right-8 top-[13.04px] hidden size-[1000px] opacity-10 md:block"
+        priority
+      />
+      <div className="relative mx-auto flex h-full max-w-[1440px] flex-col items-start justify-center px-6 py-10 sm:px-[70px] md:justify-start md:py-14">
+        <h1 className="max-w-[760px] text-[32px] font-[510] leading-normal text-[#2f2a26] [font-family:var(--font-sf-pro)]">
           Frequently Asked Questions
         </h1>
-        <p className="mt-5 max-w-[680px] text-[18px] font-medium leading-[1.45] text-[#475569] sm:mt-6 sm:text-[22px] min-[1370px]:mt-4 min-[1370px]:text-[18px] min-[1370px]:leading-7">
+        <p className="mt-4 max-w-[680px] text-[18px] font-[510] leading-7 tracking-[0.09px] text-[#344056] [font-family:var(--font-sf-pro)]">
           Simple answers about privacy, data, and how tracking works.
         </p>
-        <Button href="#" className="mt-8 min-[1370px]:mt-6 min-[1370px]:h-12 min-[1370px]:w-[139px]">
+        <Button href="#" className="mt-6 h-12 w-[139px] px-[14px]">
           Start Tracking
         </Button>
       </div>
@@ -47,35 +55,52 @@ function Hero() {
 
 function FAQList() {
   return (
-    <section className="bg-white px-4 py-10 sm:px-6 min-[1370px]:min-h-[771px] min-[1370px]:px-0">
-      <div className="mx-auto max-w-[1320px] space-y-4">
+    <section className="bg-white px-4 py-10 sm:px-6 xl:h-[771px] xl:px-0">
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-4">
         {faqs.map((faq) => (
           <article
             key={faq.question}
-            className={`rounded-lg bg-[#d7edff] px-5 py-6 sm:px-7 sm:py-8 min-[1370px]:relative min-[1370px]:p-0 ${
-              faq.open ? "min-[1370px]:h-[115px]" : "min-[1370px]:h-20"
+            className={`rounded-lg border border-[#e2e8f0] bg-[#d7edff] px-5 py-4 sm:px-7 ${
+              faq.open ? "min-h-[115px]" : "min-h-20"
             }`}
           >
-            <div className="flex items-start justify-between gap-4 sm:items-center sm:gap-8 min-[1370px]:contents">
+            <div className="flex min-h-12 items-center justify-between gap-4">
               <div className="min-w-0">
-                <h2 className="text-[20px] font-bold leading-tight sm:text-[24px] min-[1370px]:absolute min-[1370px]:left-7 min-[1370px]:top-[26px] min-[1370px]:text-[24px] min-[1370px]:leading-7">
+                <h2 className="text-[20px] font-medium leading-7 tracking-[0.1px] text-[#0f172a] [font-family:var(--font-poppins)]">
                   {faq.question}
                 </h2>
-                {faq.answer ? (
-                  <p className="mt-4 text-[18px] leading-tight text-[#526174] sm:mt-6 sm:text-[22px] min-[1370px]:absolute min-[1370px]:left-7 min-[1370px]:top-[71px] min-[1370px]:mt-0 min-[1370px]:text-[22px] min-[1370px]:leading-7">
-                    {faq.answer}
-                  </p>
-                ) : null}
               </div>
               <button
                 aria-label={`${faq.open ? "Collapse" : "Open"} ${faq.question}`}
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[28px] sm:h-12 sm:w-12 sm:text-[34px] min-[1370px]:absolute min-[1370px]:right-7 min-[1370px]:top-4 min-[1370px]:h-12 min-[1370px]:w-12 ${
-                  faq.open ? "bg-[#2563eb] text-white" : "bg-white text-[#2563eb]"
-                }`}
+                className="relative flex size-12 shrink-0 items-center justify-center rounded-[30px]"
               >
-                {faq.open ? "-" : "+"}
+                {faq.open ? (
+                  <>
+                    <span className="absolute inset-0 rounded-[30px] bg-[#2563eb] shadow-[inset_0_-0.496px_0_#b8a4e3,inset_0_0.496px_0_rgba(255,255,255,0.12)]" />
+                    <Image
+                      src="/figma-assets/faq-open-icon.svg"
+                      alt=""
+                      width={17}
+                      height={12}
+                      className="relative z-10 h-[11.37px] w-[16.107px]"
+                    />
+                  </>
+                ) : (
+                  <Image
+                    src="/figma-assets/faq-closed-icon.svg"
+                    alt=""
+                    width={51}
+                    height={51}
+                    className="size-[50.662px]"
+                  />
+                )}
               </button>
             </div>
+            {faq.answer ? (
+              <p className="mt-[7px] max-w-[754px] text-[18px] font-normal leading-7 tracking-[0.09px] text-[#344056] [font-family:var(--font-poppins)]">
+                {faq.answer}
+              </p>
+            ) : null}
           </article>
         ))}
       </div>

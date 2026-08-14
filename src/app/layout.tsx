@@ -17,7 +17,7 @@ const workSans = Work_Sans({
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["600"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
