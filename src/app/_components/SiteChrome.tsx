@@ -3,45 +3,54 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "FAQ", href: "/faq" },
-  { label: "About us", href: "#" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Home", href: "/", left: 0, width: 45 },
+  { label: "FAQ", href: "/faq", left: 78, width: 31 },
+  { label: "About us", href: "#", left: 142, width: 68 },
+  { label: "Pricing", href: "/pricing", left: 240, width: 53 },
 ];
 
 const socialItems = ["t", "o", "in", ">"];
 
 export function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-white/95 backdrop-blur">
-      <div className="mx-auto flex h-[100px] max-w-[1228px] items-center justify-between px-6">
-        <Link href="/" aria-label="NephroReach home">
+    <header className="fixed inset-x-0 top-0 z-50 h-[100.962px] bg-white">
+      <div className="relative mx-auto h-full w-full max-w-[1440px]">
+        <Link
+          href="/"
+          aria-label="NephroReach home"
+          className="absolute left-6 top-[16.53px] block h-[67.882px] w-[86px] min-[1200px]:left-[70px]"
+        >
           <Image
             src="/figma-assets/nephroreach-logo.png"
             alt="NephroReach"
             width={86}
             height={68}
-            className="h-[64px] w-auto"
+            className="h-full w-full object-contain"
             priority
           />
         </Link>
-        <nav className="hidden items-center gap-9 text-[16px] font-medium text-[#25221e] md:flex">
+        <nav className="absolute left-[858px] top-[24.471px] hidden h-[52px] w-[512px] text-[15.5px] font-[500] leading-[20.93px] tracking-[0.155px] text-[#25221e] min-[1200px]:block [font-family:var(--font-inter)]">
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="hover:text-[#2563eb]"
+              className="absolute top-[14.54px] flex h-[21px] items-center hover:text-[#2563eb]"
+              style={{ left: item.left, width: item.width }}
             >
               {item.label}
             </Link>
           ))}
-          <span className="h-6 w-px bg-[#25221e]/20" />
-          <a href="#" className="hover:text-[#2563eb]">
+          <a
+            href="#"
+            className="absolute left-[338px] top-[14.54px] flex h-[21px] w-[46px] items-center hover:text-[#2563eb]"
+          >
             Log in
           </a>
-          <Button href="#">Try it free</Button>
+          <Button href="#" className="absolute left-[406px] top-0 w-[106px]">
+            Try it free
+          </Button>
         </nav>
-        <Button href="#" className="md:hidden">
+        <Button href="#" className="absolute right-6 top-6 min-[1200px]:hidden">
           Try it free
         </Button>
       </div>
@@ -61,7 +70,7 @@ export function Button({
   return (
     <Link
       href={href}
-      className={`inline-flex h-[52px] items-center justify-center rounded-[12px] bg-[#2563eb] px-6 text-[16px] font-semibold text-white shadow-[inset_0_-1px_0_#dbeafe] transition hover:bg-[#1d4ed8] ${className}`}
+      className={`inline-flex h-[52px] items-center justify-center rounded-[12px] bg-[#2563eb] px-[14px] text-[16px] font-[500] leading-[24px] tracking-[0.08px] text-white shadow-[inset_0_-1px_0_#dbe9fe] transition hover:bg-[#1d4ed8] [font-family:var(--font-work-sans)] ${className}`}
     >
       {children}
     </Link>
@@ -92,54 +101,67 @@ export function QuestionBanner() {
 
 export function Footer() {
   return (
-    <footer className="bg-[#dbeaff] px-6 pb-[70px] pt-[72px] text-[#304158]">
-      <div className="mx-auto grid max-w-[1228px] gap-14 md:grid-cols-[1.6fr_0.8fr_0.8fr]">
-        <div>
+    <footer className="relative h-[417px] bg-[#dbe9fe] text-[#344056]">
+      <div className="absolute left-1/2 top-[64px] h-[187.882px] w-[1298px] -translate-x-1/2">
+        <div className="absolute left-0 top-0 h-full w-[357px]">
           <Image
             src="/figma-assets/nephroreach-logo.png"
             alt="NephroReach"
             width={86}
             height={68}
-            className="h-[66px] w-auto"
+            className="h-[67.882px] w-[86px] object-contain"
           />
-          <p className="mt-6 max-w-[430px] text-[16px] font-medium leading-[1.45]">
+          <p className="absolute left-0 top-[79.882px] w-[357px] text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)]">
             A non-clinical educational engagement platform for SMS check-ins,
             digital journaling, structured learning, and monthly live classes.
           </p>
-          <div className="mt-6 flex gap-4">
+          <div className="absolute left-0 top-[151.882px] flex h-9 w-[180px] gap-3">
             {socialItems.map((item) => (
               <a
                 key={item}
                 href="#"
                 aria-label="Social link"
-                className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-[#121722] text-sm font-bold text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-[9px] bg-[#121722] text-[12px] font-bold leading-none text-white"
               >
                 {item}
               </a>
             ))}
           </div>
         </div>
-        <FooterColumn
-          title="Platform"
-          items={["How it Works", "Product", "Pricing", "Resources"]}
-        />
-        <FooterColumn
-          title="Legal"
-          items={["Privacy Policy", "Terms of Service", "Contact"]}
-        />
+        <div className="absolute left-[796px] top-0 flex h-full w-[502px]">
+          <FooterColumn
+            title="Platform"
+            items={["How it Works", "Product", "Pricing", "Resources"]}
+          />
+          <FooterColumn
+            title="Legal"
+            items={["Privacy Policy", "Terms of Service", "Contact"]}
+            className="ml-[164px]"
+          />
+        </div>
       </div>
-      <p className="mt-[52px] text-center text-[16px] font-semibold">
-        (c) 2025 DropClicker. All rights reserved.
+      <p className="absolute left-1/2 top-[308.999px] h-5 w-[274px] -translate-x-1/2 text-center text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)]">
+        &copy; 2025 DropClicker. All rights reserved.
       </p>
     </footer>
   );
 }
 
-function FooterColumn({ title, items }: { title: string; items: string[] }) {
+function FooterColumn({
+  title,
+  items,
+  className = "",
+}: {
+  title: string;
+  items: string[];
+  className?: string;
+}) {
   return (
-    <div className="pt-3">
-      <h3 className="text-[17px] font-bold text-[#1f2d46]">{title}</h3>
-      <ul className="mt-8 space-y-6 text-[16px] font-medium">
+    <div
+      className={`w-[88px] text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)] ${className}`}
+    >
+      <h3 className="text-[#0f172a]">{title}</h3>
+      <ul className="mt-4 space-y-4">
         {items.map((item) => (
           <li key={item}>
             <a href="#" className="hover:text-[#2563eb]">
