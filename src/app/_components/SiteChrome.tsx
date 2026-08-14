@@ -114,7 +114,7 @@ export function Button({
 
 export function QuestionBanner() {
   return (
-    <section className="relative h-[420px] overflow-hidden bg-[#d7efff]">
+    <section className="relative min-h-[320px] overflow-hidden bg-[#d7efff] md:h-[421px]">
       <Image
         src="/figma-assets/image11_8359_18243.png"
         alt=""
@@ -122,11 +122,13 @@ export function QuestionBanner() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="relative z-10 mx-auto flex h-full max-w-[1228px] flex-col items-center justify-center px-6 text-center">
-        <h2 className="text-[42px] font-normal leading-tight text-black md:text-[54px]">
-          Still have questions?
+      <div className="relative z-10 mx-auto flex h-full max-w-[1228px] flex-col items-center justify-center px-6 text-center md:absolute md:left-1/2 md:top-[147px] md:h-[128px] md:w-[618px] md:max-w-none md:-translate-x-1/2 md:justify-start md:px-0">
+        <h2 className="text-[28px] font-semibold leading-tight text-black sm:text-[34px] md:text-[24px] md:leading-6">
+          Want to stay informed about
+          <br />
+          new courses &amp; study?
         </h2>
-        <Button href="#" className="mt-8 h-[52px] px-8">
+        <Button href="#" className="mt-8 h-[52px] w-[116px] px-0 md:mt-7">
           Contact Us
         </Button>
       </div>
@@ -136,9 +138,9 @@ export function QuestionBanner() {
 
 export function Footer() {
   return (
-    <footer className="relative h-[417px] bg-[#dbe9fe] text-[#344056]">
-      <div className="absolute left-1/2 top-[64px] h-[187.882px] w-[1298px] -translate-x-1/2">
-        <div className="absolute left-0 top-0 h-full w-[357px]">
+    <footer className="relative bg-[#dbe9fe] px-6 py-12 text-[#344056] xl:h-[417px] xl:px-0 xl:py-0">
+      <div className="mx-auto grid max-w-[1298px] gap-12 md:grid-cols-[1fr_auto] xl:absolute xl:left-1/2 xl:top-[64px] xl:h-[187.882px] xl:w-[1298px] xl:-translate-x-1/2 xl:grid-cols-none xl:gap-0">
+        <div className="relative max-w-[357px] xl:absolute xl:left-0 xl:top-0 xl:h-full xl:w-[357px]">
           <Image
             src="/figma-assets/nephroreach-logo.png"
             alt="NephroReach"
@@ -146,11 +148,11 @@ export function Footer() {
             height={68}
             className="h-[67.882px] w-[86px] object-contain"
           />
-          <p className="absolute left-0 top-[79.882px] w-[357px] text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)]">
+          <p className="mt-3 max-w-[357px] text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)] xl:absolute xl:left-0 xl:top-[79.882px] xl:mt-0 xl:w-[357px]">
             A non-clinical educational engagement platform for SMS check-ins,
             digital journaling, structured learning, and monthly live classes.
           </p>
-          <div className="absolute left-0 top-[151.882px] flex h-9 w-[180px] gap-3">
+          <div className="mt-6 flex h-9 w-[180px] gap-3 xl:absolute xl:left-0 xl:top-[151.882px] xl:mt-0">
             {socialItems.map((item) => (
               <a
                 key={item}
@@ -163,7 +165,7 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <div className="absolute left-[796px] top-0 flex h-full w-[502px]">
+        <div className="grid grid-cols-2 gap-12 sm:gap-20 xl:absolute xl:left-[796px] xl:top-0 xl:flex xl:h-full xl:w-[502px] xl:gap-0">
           <FooterColumn
             title="Platform"
             items={["How it Works", "Product", "Pricing", "Resources"]}
@@ -171,11 +173,11 @@ export function Footer() {
           <FooterColumn
             title="Legal"
             items={["Privacy Policy", "Terms of Service", "Contact"]}
-            className="ml-[164px]"
+            className="xl:ml-[164px]"
           />
         </div>
       </div>
-      <p className="absolute left-1/2 top-[308.999px] h-5 w-[274px] -translate-x-1/2 text-center text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)]">
+      <p className="mx-auto mt-12 max-w-[274px] text-center text-[14px] font-[510] leading-[20px] tracking-[0.07px] [font-family:var(--font-sf-pro)] xl:absolute xl:left-1/2 xl:top-[308.999px] xl:mt-0 xl:h-5 xl:w-[274px] xl:-translate-x-1/2">
         &copy; 2025 DropClicker. All rights reserved.
       </p>
     </footer>
