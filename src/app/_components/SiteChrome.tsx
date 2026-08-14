@@ -30,7 +30,7 @@ export function Header() {
             priority
           />
         </Link>
-        <Button href="#" className="absolute right-6 top-6 min-[1200px]:hidden">
+        <Button href="/signup" className="absolute right-6 top-6 min-[1200px]:hidden">
           Try it free
         </Button>
       </div>
@@ -77,13 +77,13 @@ function DesktopHeader({ className = "" }: { className?: string }) {
           className="absolute left-[1173px] top-[38.471px] h-6 w-px bg-[#25221e]/[0.18]"
         />
         <Link
-          href="#"
+          href="/signin"
           className="absolute left-[1197px] top-[39px] flex h-[21px] w-[52px] items-center whitespace-nowrap transition-colors hover:text-[var(--header-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--header-accent)]"
         >
           Log in
         </Link>
         <Link
-          href="#"
+          href="/signup"
           className="absolute left-[1264px] top-[24.471px] flex h-[52px] w-[106px] items-center justify-center rounded-[12px] bg-[var(--header-accent)] text-[16px] font-medium leading-6 tracking-[0.08px] text-white shadow-[inset_0_-1px_0_#dbe9fe] transition-colors hover:bg-[#1d4ed8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--header-accent)] [font-family:var(--font-work-sans)]"
         >
           Try it free
